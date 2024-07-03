@@ -1,0 +1,14 @@
+header{
+  background-color: rgb(23, 28, 75);
+  backdrop-filter: blur(8px);
+  transition: background-color 0.3s ease;
+}
+
+header.scrolled {
+  background-color: rgba(23, 28, 75, 0.6);
+}
+
+img{
+  height: 30px;
+  cursor: pointer;
+}
