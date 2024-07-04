@@ -1,5 +1,7 @@
+import { IRole } from "./IRole";
+
 export interface ILogin {
-  roles: string[];
+
   token: string;
   user: {
     id: number;
@@ -7,7 +9,7 @@ export interface ILogin {
     cognome: string;
     username: string;
     email: string;
-    password:string;
+    roles: IRole[];
         }
 }
 

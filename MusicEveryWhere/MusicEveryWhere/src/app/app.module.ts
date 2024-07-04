@@ -11,10 +11,11 @@ import { FooterComponent } from './main-components/footer/footer.component';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { AddProdottoModule } from './pages/add-prodotto/add-prodotto.module';
 import { NoleggioModule } from './pages/noleggio/noleggio.module';
-import { EditProdottoModule } from './pages/edit-prodotto/edit-prodotto.module';
+
 import { CarrelloModule } from './pages/carrello/carrello.module';
 import { HomeModule } from './pages/home/home.module';
 import { ProfiloModule } from './pages/profilo/profilo.module';
+import { EditProdottoModule } from './pages/edit-prodotto/edit-prodotto.module';
 
 
 

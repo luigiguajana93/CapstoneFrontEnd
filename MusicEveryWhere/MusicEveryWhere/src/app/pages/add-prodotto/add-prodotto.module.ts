@@ -3,7 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { AddProdottoRoutingModule } from './add-prodotto-routing.module';
 import { AddProdottoComponent } from './add-prodotto.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule, Routes } from '@angular/router';
 
+const routes: Routes = [
+  { path: '', component: AddProdottoComponent }
+];
 
 @NgModule({
   declarations: [
@@ -11,7 +16,10 @@ import { AddProdottoComponent } from './add-prodotto.component';
   ],
   imports: [
     CommonModule,
-    AddProdottoRoutingModule
+    FormsModule,
+    ReactiveFormsModule,
+    AddProdottoRoutingModule,
+    RouterModule.forChild(routes)
   ]
 })
 export class AddProdottoModule { }

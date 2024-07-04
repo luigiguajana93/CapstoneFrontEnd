@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 import { ILogin } from '../Models/ILogin';
 import { IRegister } from '../Models/IRegister';
+import { IRole } from '../Models/IRole';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,11 @@ export class AuthService {
 
   getCurrentUser(): ILogin | null {
     return this.currentUserValue;
+  }
+
+  isAdmin(): boolean {
+    const user = this.getCurrentUser();
+    return user ? Array.isArray(user.user.roles) && user.user.roles.some((role: IRole) => role.roleType === 'ADMIN') : false;
   }
 }
 

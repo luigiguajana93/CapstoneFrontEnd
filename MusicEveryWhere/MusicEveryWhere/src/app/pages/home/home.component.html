@@ -1,1 +1,37 @@
-<p>home works!</p>
+<div class="container mt-4">
+  <div class="row mb-3">
+    <div class="col-md-6">
+      <input type="text" class="form-control" [(ngModel)]="searchQuery" placeholder="Cerca prodotto...">
+    </div>
+    <div class="col-md-2">
+      <button class="btn btn-primary" (click)="searchProdotti()">Cerca</button>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col">
+      <button *ngFor="let categoria of categorie" class="btn btn-outline-secondary me-2" (click)="filterByCategoria(categoria.id)">
+        {{ categoria.descrizione }}
+      </button>
+      <button class="btn btn-outline-secondary me-2" (click)="resetCategoria()">Tutte</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4" *ngFor="let prodotto of prodotti">
+      <div class="card mb-4">
+        <img [src]="prodotto.imageUrl" class="card-img-top" alt="{{ prodotto.nomeProdotto }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ prodotto.nomeProdotto }}</h5>
+          <p class="card-text">{{ prodotto.descrizione }}</p>
+          <p class="card-text"><strong>Prezzo:</strong> {{ prodotto.prezzo | currency }}</p>
+          <p class="card-text"><strong>Categoria:</strong> {{ prodotto.categoria.descrizione }}</p>
+          <p class="card-text"><strong>Disponibile:</strong> <i class="fa" [ngClass]="{'fa-check-circle': prodotto.isDisponibile, 'fa-times-circle': !prodotto.isDisponibile}"></i></p>
+          <button class="btn btn-success" (click)="aggiungiAlCarrello(prodotto)">Aggiungi al carrello</button>
+          <button class="btn btn-info" (click)="aggiungiANoleggio(prodotto)">Noleggia</button>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,32 @@
-<p>add-prodotto works!</p>
+<div class="container mt-5">
+  <h2>Aggiungi Prodotto</h2>
+  <form [formGroup]="prodottoForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="nomeProdotto">Nome Prodotto</label>
+      <input id="nomeProdotto" class="form-control" formControlName="nomeProdotto">
+    </div>
+    <div class="form-group">
+      <label for="descrizione">Descrizione</label>
+      <textarea id="descrizione" class="form-control" formControlName="descrizione"></textarea>
+    </div>
+    <div class="form-group">
+      <label for="prezzo">Prezzo</label>
+      <input id="prezzo" type="number" class="form-control" formControlName="prezzo">
+    </div>
+    <div class="form-group">
+      <label for="imageUrl">URL Immagine</label>
+      <input id="imageUrl" class="form-control" formControlName="imageUrl">
+    </div>
+    <div class="form-group">
+      <label for="categoriaId">Categoria</label>
+      <select id="categoriaId" class="form-control" formControlName="categoriaId">
+        <option *ngFor="let categoria of categorie" [value]="categoria.id">{{ categoria.descrizione }}</option>
+      </select>
+    </div>
+    <div class="form-check">
+      <input id="isDisponibile" type="checkbox" class="form-check-input" formControlName="isDisponibile">
+      <label for="isDisponibile" class="form-check-label">Disponibile</label>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Aggiungi Prodotto</button>
+  </form>
+</div>
