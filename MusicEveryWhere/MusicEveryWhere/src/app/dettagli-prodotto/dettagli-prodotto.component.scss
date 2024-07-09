@@ -1,0 +1,58 @@
+.container{
+  border-radius: 10px;
+  border-color:#fdfef9;
+  box-shadow: 0 4px 8px rgba(248, 248, 248, 0.89);
+  background-color: #1570ad61;
+  padding: 20px;
+  position: relative;
+
+}
+
+.img-fluid{
+  object-fit: contain;
+  border-radius: 20px;
+}
+
+.card {
+  margin: 0 auto;
+  width: 50%;
+  .card-body {
+    text-align: center;
+
+  }
+}
+
+.dx{
+  background-color: #fb8a019f;
+  border-radius: 20px;
+  font-size: 1.5rem;
+}
+
+.btn-car{
+  background-color: #fb9f01ee;
+  color: #fff;
+}
+
+.btn-car:hover{
+  background-color: #855503ee;
+}
+
+.btn-nol{
+  background-color: #1570adb7;
+  color: #fff;
+}
+
+.btn-nol:hover{
+  background-color: #093552f6;
+}
+
+.btn-back{
+  background-color: #02327bb7;
+  color: #fff;
+}
+
+.btn-back:hover{
+  background-color: #855503ee;
+}
+
+

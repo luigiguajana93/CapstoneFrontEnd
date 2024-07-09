@@ -1,7 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { GuestGuard } from './auth/guest.guard';
-import { AdminGuard } from './auth/admin.guard';  // Importa AdminGuard
+import { AdminGuard } from './auth/admin.guard';
+import { DettagliProdottoComponent } from './dettagli-prodotto/dettagli-prodotto.component';
+
 
 const routes: Routes = [
   {
@@ -37,7 +39,8 @@ const routes: Routes = [
     loadChildren: () => import('./pages/add-prodotto/add-prodotto.module').then(m => m.AddProdottoModule),
     canActivate: [AdminGuard],
     canActivateChild: [AdminGuard]
-  }
+  },
+  { path: 'prodotto/:id', component: DettagliProdottoComponent }
 ];
 
 @NgModule({

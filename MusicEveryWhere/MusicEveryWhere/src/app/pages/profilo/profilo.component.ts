@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { UtenteService } from '../../services/utente.service';
 import { AuthService } from '../../auth/auth.service';
 import { IUtente } from '../../Models/IUtente';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profilo',
@@ -13,7 +14,8 @@ export class ProfiloComponent implements OnInit {
   editMode: boolean = false;
   selectedFile: File | null = null;
 
-  constructor(private utenteService: UtenteService, private authService: AuthService) {}
+
+  constructor(private utenteService: UtenteService, private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     const currentUser = this.authService.getCurrentUser();
@@ -54,5 +56,9 @@ export class ProfiloComponent implements OnInit {
         this.disableEditMode();
       });
     }
+  }
+
+  tornaIndietro(): void {
+    this.router.navigate(['/home']);
   }
 }

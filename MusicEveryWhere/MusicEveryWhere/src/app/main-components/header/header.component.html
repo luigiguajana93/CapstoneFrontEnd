@@ -1,31 +1,25 @@
 <header class="sticky-top d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 px-3">
 
   <ul class="nav col-7 col-md-auto mb-2 justify-content-center align-items-center mb-md-0">
-    <li><a  routerLink="/home" class="nav-link text-white px-2"><i class="fas fa-home"></i> Home</a></li>
+    <li *ngIf="isUserLoggedIn"><a  routerLink="/home" class="nav-link  px-4"> Home</a></li>
     <li></li>
-    <li><a  routerLink="/profilo" class="nav-link text-white px-2"><i class="fas fa-home"></i> Profilo</a></li>
+    <li *ngIf="isUserLoggedIn"><a  routerLink="/profilo" class="nav-link  px-4"> Profilo</a></li>
     <li></li>
-    <li *ngIf="isAdmin"><a  routerLink="/add-prodotto" class="nav-link text-white px-2"><i class="fas fa-home"></i> Aggiungi Prodotto</a></li>
-    <li></li>
-    <img routerLink="/home" class="mt-2 me-2" src="../../../assets/img/logo.png" alt="logo">
-
-    <li *ngIf="isAdmin" ><a   routerLink="/edit-prodotto" class="nav-link text-white px-2"><i class="fas fa-home"></i> Modifica Prodotto</a></li>
+    <li *ngIf="isAdmin"><a  routerLink="/add-prodotto" class="nav-link  px-4"> Aggiungi Prodotto</a></li>
     <li></li>
 
-    <li><a  routerLink="/carrello" class="nav-link text-white px-2"><i class="fas fa-home"></i> Carrello</a></li>
+    <li *ngIf="isAdmin" ><a   routerLink="/edit-prodotto" class="nav-link  px-4"> Modifica Prodotto</a></li>
     <li></li>
-    <li><a  routerLink="/noleggio" class="nav-link text-white px-2"><i class="fas fa-home"></i> Noleggio</a></li>
+
+    <li *ngIf="isUserLoggedIn"><a  routerLink="/carrello" class="nav-link  px-4"> Carrello</a></li>
+    <li></li>
+    <li *ngIf="isUserLoggedIn"><a  routerLink="/noleggio" class="nav-link  px-4"> Noleggio</a></li>
     <li></li>
   </ul>
 
-  <div class="col-md-3 text-end">
-    <button *ngIf="!isUserLoggedIn"  type="button" routerLink="/auth/login" class="btn  btn-outline-success me-2">Accedi</button>
-    <button *ngIf="!isUserLoggedIn"  type="button" routerLink="/auth/register" class="btn btn-primary">Registrati</button>
-    <div class="row justify-content-end align-items-center gap-3">
-      <a title="Noleggio"  routerLink="/noleggio" class="col-1 nav-link text-white px-2"><i class="fas fa-heart"></i></a>
-      <a title="Carrello"  routerLink="/carrello" class="col-1 nav-link text-white px-2"><i class="fas fa-shopping-cart"></i></a>
-
-      <button (click)="logout()" class="col-10 col-md-3 col-lg-2 btn btn-danger me-2">Esci</button>
-    </div>
+  <div class="col-md-4 text-end">
+    <button *ngIf="!isUserLoggedIn"  type="button" routerLink="/auth/login" class="btn  btn-outline-success comic-button me-2">Accedi</button>
+    <button *ngIf="!isUserLoggedIn"  type="button" routerLink="/auth/register" class="btn btn-primary comic-button me-2">Registrati</button>
+    <button *ngIf="isUserLoggedIn"  (click)="logout()" class="btn  comic-button me-2 ">Esci</button>
   </div>
 </header>

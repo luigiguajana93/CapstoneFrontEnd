@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { NoleggioRoutingModule } from './noleggio-routing.module';
 import { NoleggioComponent } from './noleggio.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +12,9 @@ import { NoleggioComponent } from './noleggio.component';
   ],
   imports: [
     CommonModule,
-    NoleggioRoutingModule
+    NoleggioRoutingModule,
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class NoleggioModule { }

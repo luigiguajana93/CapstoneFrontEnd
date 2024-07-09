@@ -1,5 +1,5 @@
 <div class="container mt-5">
-  <h2>Aggiungi Prodotto</h2>
+  <h2 class="text-center">Aggiungi Prodotto</h2>
   <form [formGroup]="prodottoForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="nomeProdotto">Nome Prodotto</label>
@@ -23,10 +23,7 @@
         <option *ngFor="let categoria of categorie" [value]="categoria.id">{{ categoria.descrizione }}</option>
       </select>
     </div>
-    <div class="form-check">
-      <input id="isDisponibile" type="checkbox" class="form-check-input" formControlName="isDisponibile">
-      <label for="isDisponibile" class="form-check-label">Disponibile</label>
-    </div>
+
     <button type="submit" class="btn btn-primary mt-3">Aggiungi Prodotto</button>
   </form>
 </div>

@@ -1,0 +1,23 @@
+.container{
+    border-radius: 10px;
+    border-color:#fdfef9;
+    box-shadow: 0 4px 8px rgba(248, 248, 248, 0.89);
+    background-color: #1570ad61;
+    padding: 20px;
+    position: relative;
+
+}
+
+h2,label{
+  color:#fb5e01;
+  font-weight: bold;
+
+}
+.btn{
+  background-color: #fb5e01;
+}
+.btn:hover{
+  background-color: #fdfef9;
+  color:#fb5e01;
+  }
+

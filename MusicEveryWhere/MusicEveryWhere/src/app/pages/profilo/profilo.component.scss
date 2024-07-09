@@ -1,0 +1,64 @@
+.card{
+
+  border-radius: 10px;
+  border-color:#fdfef9;
+  box-shadow: 0 4px 8px rgba(248, 248, 248, 0.89);
+  background-color: #1570ad61;
+  padding: 20px;
+  position: relative;
+}
+
+.card-title{
+  color:#fb5e01;
+}
+
+.list-group-item{
+  border-radius: 10px;
+  border-color:#fdfef9;
+  box-shadow: 0 4px 8px rgba(248, 248, 248, 0.89);
+  background-color: #1570ad61;
+  padding: 20px;
+  position: relative;
+}
+
+strong{
+  color:#fb5e01;
+}
+
+span{
+  color:#fdfef9;
+  display: flex;
+
+}
+.btn:hover{
+background-color: #fdfef9;
+color:#fb5e01;
+}
+
+.btn-primary{
+background-color: #1570ad61;
+}
+
+.btn-success{
+  background-color:#fb5e01;
+  border-color:#fdfef9;
+}
+
+.btn-secondary
+{
+  border-color:#fdfef9;
+}
+
+h3 {
+color:#fb5d01c3;
+
+}
+
+.btn-car{
+  background-color: #fb9f01ee;
+  color: #fff;
+}
+
+.btn-car:hover{
+  background-color: #855503ee;
+}

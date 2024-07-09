@@ -4,6 +4,7 @@ import { ProdottoService } from '../../services/prodotto.service';
 import { IProdotto } from '../../Models/IProdotto';
 import { ICategoria } from '../../Models/ICategoria';
 
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-edit-prodotto',
@@ -14,6 +15,7 @@ export class EditProdottoComponent implements OnInit {
   prodotti: IProdotto[] = [];
   categorie: ICategoria[] = [];
   selectedProdotto: IProdotto | null = null;
+  prodottoToDelete: IProdotto | null = null;
   searchQuery: string = '';
   prodottoForm: FormGroup;
 
@@ -64,18 +66,34 @@ export class EditProdottoComponent implements OnInit {
     this.prodottoForm.patchValue(prodotto);
   }
 
+  confirmDelete(prodotto: IProdotto): void {
+    this.prodottoToDelete = prodotto;
+    const deleteModal: any = document.getElementById('confirmDeleteModal');
+    const modalInstance = new bootstrap.Modal(deleteModal);
+    modalInstance.show();
+  }
+
+  deleteConfirmed(): void {
+    if (this.prodottoToDelete) {
+      this.prodottoService.deleteProdotto(this.prodottoToDelete.id).subscribe(
+        () => {
+          console.log(this.prodottoToDelete?.id)
+          this.prodotti = this.prodotti.filter(p => p.id !== this.prodottoToDelete!.id);
+          this.prodottoToDelete = null;
+        }
+      );
+    }
+  }
+
   onSubmit(): void {
     if (this.prodottoForm.valid) {
       this.prodottoService.updateProdotto(this.prodottoForm.value).subscribe(() => {
         this.loadProdotti();
         this.selectedProdotto = null;
+        const editModal = document.getElementById('editProdottoModal');
+        const modalInstance = bootstrap.Modal.getInstance(editModal);
+        modalInstance.hide();
       });
     }
-  }
-
-  deleteProdotto(prodotto: IProdotto): void {
-    this.prodottoService.deleteProdotto(prodotto.id).subscribe(() => {
-      this.loadProdotti();
-    });
   }
 }

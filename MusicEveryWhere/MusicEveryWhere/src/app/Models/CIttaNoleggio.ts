@@ -1,0 +1,12 @@
+export enum CittaNoleggio {
+  ROMA = 'ROMA',
+  MILANO = 'MILANO',
+  VENEZIA = 'VENEZIA',
+  PALERMO = 'PALERMO',
+  NAPOLI = 'NAPOLI',
+  GENOVA = 'GENOVA',
+  CAGLIARI = 'CAGLIARI',
+  TORINO = 'TORINO',
+  COSENZA = 'COSENZA',
+  FIRENZE = 'FIRENZE'
+}

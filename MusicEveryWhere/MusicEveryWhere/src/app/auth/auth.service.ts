@@ -1,3 +1,4 @@
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -5,6 +6,7 @@ import { tap } from 'rxjs/operators';
 import { ILogin } from '../Models/ILogin';
 import { IRegister } from '../Models/IRegister';
 import { IRole } from '../Models/IRole';
+import {jwtDecode} from 'jwt-decode';
 
 @Injectable({
   providedIn: 'root'
@@ -52,5 +54,23 @@ export class AuthService {
     const user = this.getCurrentUser();
     return user ? Array.isArray(user.user.roles) && user.user.roles.some((role: IRole) => role.roleType === 'ADMIN') : false;
   }
-}
 
+  getUserIdFromToken(): number | null {
+
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+
+      return null;
+    }
+
+    try {
+      const decoded: any = jwtDecode(token);
+
+      return decoded.id;
+    } catch (error) {
+      console.error('Invalid token:', error);
+      return null;
+    }
+  }
+}

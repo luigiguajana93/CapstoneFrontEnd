@@ -1,35 +1,62 @@
 <div class="container mt-4">
-  <div class="row mb-3">
-    <div class="col-md-6">
+<!--Carosello con i marchi degli strumenti -->
+
+<div class="slider ">
+  <div class="slide-track">
+  <div class="slide">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Fender_guitars_logo.svg/1920px-Fender_guitars_logo.svg.png" height="100" width="250" alt="" />
+  </div>
+  <div class="slide">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/69/Marshall_logo.svg" height="100" width="250" alt="" />
+  </div>
+  <div class="slide">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Yamaha-Logo.png" height="100" width="250" alt="" />
+  </div>
+  <div class="slide">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Gibson_Guitar_logo.svg" height="100" width="250" alt="" />
+  </div>
+   <div class="slide">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/1/12/Ludwig_logo.png" height="100" width="250" alt="" />
+  </div>
+  <div class="slide">
+  <img src="https://cdn.freebiesupply.com/logos/large/2x/pioneer-4-logo-png-transparent.png" height="100" width="250" alt="" />
+  </div>
+  </div>
+  </div>
+
+
+<!--FINE Carosello con i marchi degli strumenti -->
+  <div class="row mb-3 py-5 d-flex justify-content-center">
+    <div class="col-md-6  ">
       <input type="text" class="form-control" [(ngModel)]="searchQuery" placeholder="Cerca prodotto...">
     </div>
     <div class="col-md-2">
-      <button class="btn btn-primary" (click)="searchProdotti()">Cerca</button>
+      <button class="btn btn-cat" (click)="searchProdotti()">Cerca</button>
     </div>
   </div>
 
-  <div class="row mb-3">
+  <div class="row mb-3 pb-4">
     <div class="col">
-      <button *ngFor="let categoria of categorie" class="btn btn-outline-secondary me-2" (click)="filterByCategoria(categoria.id)">
+      <button *ngFor="let categoria of categorie" class="btn btn-cat btn-lg me-2" (click)="filterByCategoria(categoria.id)">
         {{ categoria.descrizione }}
       </button>
-      <button class="btn btn-outline-secondary me-2" (click)="resetCategoria()">Tutte</button>
+      <button class="btn  btn-lg me-2 btn-reset-cat" (click)="resetCategoria()">Tutte</button>
     </div>
   </div>
 
   <div class="row">
-    <div class="col-md-4" *ngFor="let prodotto of prodotti">
-      <div class="card mb-4">
+    <div class="col-md-4 " *ngFor="let prodotto of prodotti">
+      <div class="card mb-4" (click)="vaiAiDettagliProdotto(prodotto.id)">
         <img [src]="prodotto.imageUrl" class="card-img-top" alt="{{ prodotto.nomeProdotto }}">
         <div class="card-body">
           <h5 class="card-title">{{ prodotto.nomeProdotto }}</h5>
           <p class="card-text">{{ prodotto.descrizione }}</p>
-          <p class="card-text"><strong>Prezzo:</strong> {{ prodotto.prezzo | currency }}</p>
+          <p class="card-text"><strong>Prezzo:</strong> {{ prodotto.prezzo | currency:'EUR':'symbol' }}</p>
           <p class="card-text"><strong>Categoria:</strong> {{ prodotto.categoria.descrizione }}</p>
-          <p class="card-text"><strong>Disponibile:</strong> <i class="fa" [ngClass]="{'fa-check-circle': prodotto.isDisponibile, 'fa-times-circle': !prodotto.isDisponibile}"></i></p>
-          <button class="btn btn-success" (click)="aggiungiAlCarrello(prodotto)">Aggiungi al carrello</button>
-          <button class="btn btn-info" (click)="aggiungiANoleggio(prodotto)">Noleggia</button>
-
+          <div class="d-flex justify-content-evenly">
+          <button class="btn btn-reset-cat" (click)="aggiungiAlCarrello(prodotto)">Carrellami</button>
+          <button class="btn btn-cat" (click)="aggiungiANoleggio(prodotto)">Noleggiami</button>
+        </div>
         </div>
       </div>
     </div>

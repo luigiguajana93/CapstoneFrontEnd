@@ -35,15 +35,24 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/assets",
+                "output": "/assets"
+              },
+              {
+                "glob": "favicon.ico",
+                "input": "src/",
+                "output": "/"
               }
             ],
             "styles": [
               "src/styles.scss",
+              "./node_modules/@fortawesome/fontawesome-free/css/all.min.css",
               "./node_modules/bootstrap/dist/css/bootstrap.min.css"
+
             ],
             "scripts": [
               "./node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+
             ]
           },
           "configurations": {
@@ -97,7 +106,13 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public"
+                "input": "src/assets",
+                "output": "/assets"
+              },
+              {
+                "glob": "favicon.ico",
+                "input": "src/",
+                "output": "/"
               }
             ],
             "styles": [

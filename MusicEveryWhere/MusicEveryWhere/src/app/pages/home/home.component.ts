@@ -1,8 +1,10 @@
+import { CarrelloService } from './../../services/carrello.service';
 import { Component, OnInit } from '@angular/core';
 import { ProdottoService } from '../../services/prodotto.service';
 import { IProdotto } from '../../Models/IProdotto';
 import { ICategoria } from '../../Models/ICategoria';
 import { AuthService } from '../../auth/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,13 +17,16 @@ export class HomeComponent implements OnInit {
   searchQuery: string = '';
   selectedCategoriaId: number | null = null;
 
-
-  constructor(private prodottoService: ProdottoService,private authService: AuthService) { }
+  constructor(
+    private prodottoService: ProdottoService,
+    private authService: AuthService,
+    private carrelloService: CarrelloService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.loadProdotti();
     this.loadCategorie();
-
   }
 
   loadProdotti(): void {
@@ -62,19 +67,21 @@ export class HomeComponent implements OnInit {
     this.loadProdotti();
   }
 
+  vaiAiDettagliProdotto(prodottoId: number): void {
+    this.router.navigate(['/prodotto', prodottoId]);
+  }
+
   aggiungiAlCarrello(prodotto: IProdotto): void {
-    const carrelloId = 1; // Ottieni l'ID del carrello dell'utente loggato
-    const quantita = 1; // Quantità da aggiungere
-    this.prodottoService.aggiungiAlCarrello(carrelloId, prodotto.id, quantita).subscribe(() => {
-      console.log('Prodotto aggiunto al carrello');
-    });
+    let prodottiCarrello: IProdotto[] = JSON.parse(localStorage.getItem('prodottiCarrello') || '[]');
+    prodottiCarrello.push(prodotto);
+    localStorage.setItem('prodottiCarrello', JSON.stringify(prodottiCarrello));
+    console.log('Prodotto aggiunto al carrello');
   }
 
   aggiungiANoleggio(prodotto: IProdotto): void {
-    const noleggioId = 1; // Ottieni l'ID del noleggio dell'utente loggato
-    this.prodottoService.aggiungiANoleggio(noleggioId, prodotto.id).subscribe(() => {
-      console.log('Prodotto aggiunto al noleggio');
-    });
+    let prodottiNoleggiati: IProdotto[] = JSON.parse(localStorage.getItem('prodottiNoleggiati') || '[]');
+    prodottiNoleggiati.push(prodotto);
+    localStorage.setItem('prodottiNoleggiati', JSON.stringify(prodottiNoleggiati));
+    console.log('Prodotto aggiunto al noleggio');
   }
-
 }

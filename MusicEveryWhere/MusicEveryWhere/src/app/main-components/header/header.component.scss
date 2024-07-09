@@ -1,5 +1,5 @@
 header{
-  background-color: rgb(23, 28, 75);
+  background-color: rgba(23, 28, 75, 0.652);
   backdrop-filter: blur(8px);
   transition: background-color 0.3s ease;
 }
@@ -11,4 +11,57 @@ header.scrolled {
 img{
   height: 30px;
   cursor: pointer;
+}
+
+ul{
+  li{
+    a{
+      text-decoration: none;
+      color:#fff
+    }
+  }
+}
+ul{
+  li{
+    a:hover{
+
+      border-radius: 30px;
+      background-color: aliceblue;
+      color: #fa5d00;
+      transition: all 0.8s ease;
+    }
+  }
+}
+
+
+
+//btn esci
+
+.comic-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #f18a2e;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.comic-button:hover {
+  background-color: #fff;
+  color: #11578e;
+  border: 2px solid #f18a2e;
+  box-shadow: 5px 5px 0px #f18a2e;
+}
+
+.comic-button:active {
+  background-color: #fcf414;
+  box-shadow: none;
+  transform: translateY(4px);
 }

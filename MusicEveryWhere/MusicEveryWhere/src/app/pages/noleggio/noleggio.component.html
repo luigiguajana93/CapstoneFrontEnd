@@ -1,1 +1,44 @@
-<p>noleggio works!</p>
+<div class="container mt-5">
+  <div class="row">
+
+    <div class="col-md-6">
+      <h3>Prodotti Noleggiati</h3>
+      <ul class="list-group">
+        <li *ngFor="let prodotto of prodottiNoleggiati" class="list-group-item">
+          <div class="d-flex justify-content-between">
+            <div>
+              <img [src]="prodotto.imageUrl" alt="{{ prodotto.nomeProdotto }}" class="img-thumbnail" width="50">
+              <span>{{ prodotto.nomeProdotto }}</span>
+            </div>
+            <div>
+              <span>{{ prodotto.prezzo | currency:'EUR':'symbol' }}</span>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <button class="btn btn-danger mt-3" (click)="svuotaNoleggio()">Svuota Noleggio</button>
+    </div>
+
+    <div class="col-md-6">
+      <h3>Dettagli Noleggio</h3>
+      <form [formGroup]="noleggioForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="dataInizioNoleggio">Data Inizio Noleggio</label>
+          <input id="dataInizioNoleggio" type="date" class="form-control" formControlName="dataInizioNoleggio" (change)="calculateCostoNoleggioTotale()">
+        </div>
+        <div class="form-group">
+          <label for="dataFineNoleggio">Data Fine Noleggio</label>
+          <input id="dataFineNoleggio" type="date" class="form-control" formControlName="dataFineNoleggio" (change)="calculateCostoNoleggioTotale()">
+        </div>
+        <div class="form-group">
+          <label for="cittaNoleggio">Città Noleggio</label>
+          <select id="cittaNoleggio" class="form-control" formControlName="cittaNoleggio">
+            <option *ngFor="let citta of cittaNoleggio | keyvalue" [value]="citta.key">{{ citta.key }}</option>
+          </select>
+        </div>
+        <h4>Costo Noleggio Totale: {{ costoNoleggioTotale | currency:'EUR':'symbol' }}</h4>
+        <button type="submit" class="btn btn-primary mt-3">Conferma Noleggio</button>
+      </form>
+    </div>
+  </div>
+</div>

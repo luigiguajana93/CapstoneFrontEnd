@@ -1,0 +1,24 @@
+<div class="container mt-5" *ngIf="prodotto">
+  <div class="row">
+    <div class="col-md-6 text-center">
+      <img [src]="prodotto.imageUrl" class="img-fluid" alt="{{ prodotto.nomeProdotto }}">
+    </div>
+    <div class="col-md-6 align-center ">
+      <div class="card-body p-5 dx ">
+        <h5 class="card-title py-3"><strong>Nome Strumento: </strong>{{ prodotto.nomeProdotto }}</h5>
+
+        <p class="card-text py-3"><strong>Descrizione: </strong>{{ prodotto.descrizione }}</p>
+
+        <p class="card-text py-3"><strong>Prezzo: </strong> {{ prodotto.prezzo | currency:'EUR':'symbol' }}</p>
+
+        <p class="card-text py-3"><strong>Categoria: </strong> {{ prodotto.categoria.descrizione }}</p>
+
+        <div class="d-flex gap-4">
+        <button class="btn btn-back mt-3" (click)="tornaIndietro()"> <- Indietro</button>
+        <button class="btn btn-car mt-3" (click)="aggiungiAlCarrello(prodotto)">Carrellami</button>
+        <button class="btn btn-nol mt-3" (click)="aggiungiANoleggio(prodotto)">Noleggiami</button>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,1 +1,19 @@
-<p>carrello works!</p>
+<div class="container mt-5">
+  <h3>Carrello</h3>
+  <ul class="list-group">
+    <li *ngFor="let prodotto of prodottiCarrello" class="list-group-item">
+      <div class="d-flex justify-content-between">
+        <div>
+          <img [src]="prodotto.imageUrl" alt="{{ prodotto.nomeProdotto }}" class="img-thumbnail" width="50">
+          <span>{{ prodotto.nomeProdotto }}</span>
+        </div>
+        <div>
+          <span>{{ prodotto.prezzo | currency:'EUR':'symbol' }}</span>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <button class="btn btn-danger mt-3" (click)="svuotaCarrello()">Svuota Carrello</button>
+  <h4 class="mt-3 text-white">Totale: {{ costoTotale | currency:'EUR':'symbol' }}</h4>
+  <button class="btn btn-primary mt-3" (click)="confermaAcquisto()">Conferma Acquisto</button>
+</div>

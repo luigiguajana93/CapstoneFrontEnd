@@ -11,46 +11,73 @@
         <div class="card-body">
           <h5 class="card-title">{{ prodotto.nomeProdotto }}</h5>
           <p class="card-text">{{ prodotto.descrizione }}</p>
-          <p class="card-text"><strong>Prezzo:</strong> {{ prodotto.prezzo | currency }}</p>
-          <p class="card-text"><strong>Disponibile:</strong> {{ prodotto.isDisponibile ? 'Sì' : 'No' }}</p>
-          <button class="btn btn-danger me-2" (click)="deleteProdotto(prodotto)">Elimina</button>
-          <button class="btn btn-primary" (click)="selectProdotto(prodotto)">Modifica</button>
+          <p class="card-text"><strong>Categoria: </strong>{{ prodotto.categoria.descrizione }}</p>
+          <p class="card-text"><strong>Prezzo: </strong> {{ prodotto.prezzo | currency:'EUR':'symbol' }}</p>
+          <button class="btn btn-danger me-2" (click)="confirmDelete(prodotto)">Elimina</button>
+          <button class="btn btn-primary" (click)="selectProdotto(prodotto)" data-bs-toggle="modal" data-bs-target="#editProdottoModal">Modifica</button>
         </div>
       </div>
     </div>
   </div>
 
-  <div *ngIf="selectedProdotto" class="mt-5">
-    <h3>Modifica Prodotto</h3>
-    <form [formGroup]="prodottoForm" (ngSubmit)="onSubmit()">
-      <input type="hidden" formControlName="id">
-      <div class="form-group">
-        <label for="nomeProdotto">Nome Prodotto</label>
-        <input id="nomeProdotto" class="form-control" formControlName="nomeProdotto">
+  <div class="modal fade" id="editProdottoModal" tabindex="-1" aria-labelledby="editProdottoModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="editProdottoModalLabel">Modifica Prodotto</h5>
+
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="prodottoForm" (ngSubmit)="onSubmit()">
+            <h5>*Compila tutti i dati da modificare</h5>
+            <input type="hidden" formControlName="id">
+            <div class="form-group">
+              <label for="nomeProdotto">Nome Prodotto</label>
+              <input id="nomeProdotto" class="form-control" formControlName="nomeProdotto">
+            </div>
+            <div class="form-group">
+              <label for="descrizione">Descrizione</label>
+              <textarea id="descrizione" class="form-control" formControlName="descrizione"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="prezzo">Prezzo</label>
+              <input id="prezzo" type="number" class="form-control" formControlName="prezzo">
+            </div>
+            <div class="form-group">
+              <label for="imageUrl">URL Immagine</label>
+              <input id="imageUrl" class="form-control" formControlName="imageUrl">
+            </div>
+            <div class="form-group">
+              <label for="categoriaId">Categoria</label>
+              <select id="categoriaId" class="form-control" formControlName="categoriaId">
+                <option *ngFor="let categoria of categorie" [value]="categoria.id">{{ categoria.descrizione }}</option>
+              </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-3">Salva Modifiche</button>
+          </form>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="descrizione">Descrizione</label>
-        <textarea id="descrizione" class="form-control" formControlName="descrizione"></textarea>
+    </div>
+  </div>
+
+  <!-- Modale di conferma per l'eliminazione del prodotto -->
+  <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="confirmDeleteModalLabel">Conferma Eliminazione</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Sei sicuro di voler eliminare questo prodotto?
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annulla</button>
+          <button type="button" class="btn btn-danger" (click)="deleteConfirmed()" data-bs-dismiss="modal">Elimina</button>
+        </div>
       </div>
-      <div class="form-group">
-        <label for="prezzo">Prezzo</label>
-        <input id="prezzo" type="number" class="form-control" formControlName="prezzo">
-      </div>
-      <div class="form-group">
-        <label for="imageUrl">URL Immagine</label>
-        <input id="imageUrl" class="form-control" formControlName="imageUrl">
-      </div>
-      <div class="form-group">
-        <label for="categoriaId">Categoria</label>
-        <select id="categoriaId" class="form-control" formControlName="categoriaId">
-          <option *ngFor="let categoria of categorie" [value]="categoria.id">{{ categoria.descrizione }}</option>
-        </select>
-      </div>
-      <div class="form-check">
-        <input id="isDisponibile" type="checkbox" class="form-check-input" formControlName="isDisponibile">
-        <label for="isDisponibile" class="form-check-label">Disponibile</label>
-      </div>
-      <button type="submit" class="btn btn-primary mt-3">Salva Modifiche</button>
-    </form>
+    </div>
   </div>
 </div>

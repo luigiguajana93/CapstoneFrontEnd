@@ -1,28 +1,37 @@
-<div class="container mt-5">
+<div class="container mt-5 mb-5">
   <div *ngIf="utente" class="card">
     <div class="card-body">
-      <h2 class="card-title">Profilo di {{ utente.nome }} {{ utente.cognome }}</h2>
-      <div class="text-center">
-        <img [src]="utente.avatar" alt="Avatar" class="rounded-circle" width="150">
-        <input type="file" (change)="onFileSelected($event)" *ngIf="editMode">
-        <button (click)="uploadAvatar()" class="btn btn-primary mt-2" *ngIf="editMode && selectedFile">Aggiorna Avatar</button>
+      <h2 class="card-title ">Profilo di {{ utente.nome }} {{ utente.cognome }}</h2>
+      <div class="row align-items-center">
+        <div class="col-md-4 text-center">
+          <img [src]="utente.avatar" alt="Avatar" class="rounded-circle" width="150">
+          <input type="file" (change)="onFileSelected($event)" *ngIf="editMode" class="mt-2">
+          <button (click)="uploadAvatar()" class="btn btn-primary mt-2" *ngIf="editMode && selectedFile">Aggiorna Avatar</button>
+        </div>
+        <div class="col-md-8">
+          <button class="btn btn-car mt-3 " (click)="tornaIndietro()"> <- Indietro</button>
+          <h3 class="d-flex justify-content-center">Compila tutti i campi da modificare</h3>
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Username:</strong> <span  *ngIf="!editMode">{{ utente.username }}</span> <input class="form-control" [(ngModel)]="utente.username" *ngIf="editMode"></li>
+            <li class="list-group-item"><strong>Email:</strong> <span  *ngIf="!editMode">{{ utente.email }}</span> <input class="form-control" [(ngModel)]="utente.email" *ngIf="editMode"></li>
+            <li class="list-group-item"><strong>Nome:</strong> <span *ngIf="!editMode">{{ utente.nome }}</span> <input class="form-control" [(ngModel)]="utente.nome" *ngIf="editMode"></li>
+            <li class="list-group-item"><strong>Cognome:</strong> <span *ngIf="!editMode">{{ utente.cognome }}</span> <input class="form-control" [(ngModel)]="utente.cognome" *ngIf="editMode"></li>
+            <li class="list-group-item"><strong>Città:</strong> <span *ngIf="!editMode">{{ utente.citta }}</span> <input class="form-control" [(ngModel)]="utente.citta" *ngIf="editMode"></li>
+            <li class="list-group-item"><strong>Tipo Indirizzo:</strong> <span *ngIf="!editMode">{{ utente.tipoIndirizzo }}</span> <input class="form-control" [(ngModel)]="utente.tipoIndirizzo" *ngIf="editMode"></li>
+            <li class="list-group-item"><strong>Indirizzo:</strong> <span *ngIf="!editMode">{{ utente.indirizzo }}</span> <input class="form-control" [(ngModel)]="utente.indirizzo" *ngIf="editMode"></li>
+            <li class="list-group-item"><strong>Civico:</strong> <span *ngIf="!editMode">{{ utente.civico }}</span> <input class="form-control" [(ngModel)]="utente.civico" *ngIf="editMode"></li>
+            <li class="list-group-item"><strong>CAP:</strong> <span *ngIf="!editMode">{{ utente.cap }}</span> <input class="form-control" [(ngModel)]="utente.cap" *ngIf="editMode"></li>
+            <li class="list-group-item"><strong>Numero Telefono:</strong> <span *ngIf="!editMode">{{ utente.numeroTelefono }}</span> <input class="form-control" [(ngModel)]="utente.numeroTelefono" *ngIf="editMode"></li>
+            <li class="list-group-item"><strong>Password:</strong> <span *ngIf="!editMode">********</span> <input type="password" class="form-control" [(ngModel)]="utente.password" *ngIf="editMode"></li>
+          </ul>
+          <div class="d-flex justify-content-end mt-3">
+
+            <button (click)="enableEditMode()" class="btn btn-primary me-2" *ngIf="!editMode">Modifica Profilo</button>
+            <button (click)="saveChanges()" class="btn btn-success me-2" *ngIf="editMode">Salva Modifiche</button>
+            <button (click)="disableEditMode()" class="btn btn-secondary" *ngIf="editMode">Annulla</button>
+          </div>
+        </div>
       </div>
-      <ul class="list-group mt-3">
-        <li class="list-group-item"><strong>Username:</strong> <span *ngIf="!editMode">{{ utente.username }}</span> <input [(ngModel)]="utente.username" *ngIf="editMode"></li>
-        <li class="list-group-item"><strong>Email:</strong> <span *ngIf="!editMode">{{ utente.email }}</span> <input [(ngModel)]="utente.email" *ngIf="editMode"></li>
-        <li class="list-group-item"><strong>Nome:</strong> <span *ngIf="!editMode">{{ utente.nome }}</span> <input [(ngModel)]="utente.nome" *ngIf="editMode"></li>
-        <li class="list-group-item"><strong>Cognome:</strong> <span *ngIf="!editMode">{{ utente.cognome }}</span> <input [(ngModel)]="utente.cognome" *ngIf="editMode"></li>
-        <li class="list-group-item"><strong>Città:</strong> <span *ngIf="!editMode">{{ utente.citta }}</span> <input [(ngModel)]="utente.citta" *ngIf="editMode"></li>
-        <li class="list-group-item"><strong>Tipo Indirizzo:</strong> <span *ngIf="!editMode">{{ utente.tipoIndirizzo }}</span> <input [(ngModel)]="utente.tipoIndirizzo" *ngIf="editMode"></li>
-        <li class="list-group-item"><strong>Indirizzo:</strong> <span *ngIf="!editMode">{{ utente.indirizzo }}</span> <input [(ngModel)]="utente.indirizzo" *ngIf="editMode"></li>
-        <li class="list-group-item"><strong>Civico:</strong> <span *ngIf="!editMode">{{ utente.civico }}</span> <input [(ngModel)]="utente.civico" *ngIf="editMode"></li>
-        <li class="list-group-item"><strong>CAP:</strong> <span *ngIf="!editMode">{{ utente.cap }}</span> <input [(ngModel)]="utente.cap" *ngIf="editMode"></li>
-        <li class="list-group-item"><strong>Numero Telefono:</strong> <span *ngIf="!editMode">{{ utente.numeroTelefono }}</span> <input [(ngModel)]="utente.numeroTelefono" *ngIf="editMode"></li>
-        <li class="list-group-item"><strong>Password:</strong> <span *ngIf="!editMode">********</span> <input type="password" [(ngModel)]="utente.password" *ngIf="editMode"></li>
-      </ul>
-      <button (click)="enableEditMode()" class="btn btn-primary mt-3" *ngIf="!editMode">Modifica Profilo</button>
-      <button (click)="saveChanges()" class="btn btn-success mt-3" *ngIf="editMode">Salva Modifiche</button>
-      <button (click)="disableEditMode()" class="btn btn-secondary mt-3" *ngIf="editMode">Annulla</button>
     </div>
   </div>
 </div>

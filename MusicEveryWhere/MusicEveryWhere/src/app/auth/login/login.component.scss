@@ -1,0 +1,79 @@
+//sx part
+
+.titolo{
+  font-size: 80px;
+
+}
+
+
+//login part
+body {
+  background-color: #f0f0f000; /* Colore di sfondo */
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 10px;
+  border-color:#fdfef9;
+  box-shadow: 0 4px 8px rgba(248, 248, 248, 0.89);
+  background-color: #1570ad61;
+  padding: 20px;
+  position: relative;
+}
+
+.login-card .card-body {
+  padding: 40px 20px;
+}
+
+.login-card .card-title {
+  font-weight: bold;
+  font-size: 30px;
+  color: #fb5e01;
+}
+
+.login-card p {
+  color: #ccccca;
+  font-weight: bold;
+  font-size: 20px;
+  margin-bottom: 30px;
+}
+
+.login-card .form-label {
+  font-weight: bold;
+  color: #fb5e01;
+}
+
+.login-card .form-control {
+  border-radius: 25px;
+  padding: 10px 20px;
+}
+
+.login-card .form-check-input {
+  margin-top: 5px;
+}
+
+.login-card .btn-primary {
+  background-color: #fb5e01;
+  border-color: #fb5e01;
+  border-radius: 25px;
+  padding: 10px 20px;
+}
+
+.login-card .btn-primary:hover {
+  background-color: #b34403;
+  border-color: #fb5e01;
+}
+
+.login-card a {
+  color: #fb5e01;
+  font-weight: bold;
+}
+
+.login-card a:hover {
+  color: #a53f04;
+}
+
+.text-decoration-none {
+  text-decoration: none;
+}

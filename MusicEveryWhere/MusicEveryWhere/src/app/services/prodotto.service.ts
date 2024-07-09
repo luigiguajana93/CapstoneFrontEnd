@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { IProdotto } from '../Models/IProdotto';
@@ -43,14 +43,28 @@ export class ProdottoService {
   }
 
   createProdotto(prodotto: IProdotto): Observable<IProdotto> {
-    return this.http.post<IProdotto>(this.apiUrl, prodotto);
+    return this.http.post<IProdotto>(this.apiUrl, prodotto, this.getHttpOptions());
   }
 
   updateProdotto(prodotto: IProdotto): Observable<IProdotto> {
-    return this.http.put<IProdotto>(`${this.apiUrl}/${prodotto.id}`, prodotto);
+    return this.http.put<IProdotto>(`${this.apiUrl}/${prodotto.id}`, prodotto, this.getHttpOptions());
   }
 
-  deleteProdotto(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  deleteProdotto(prodottoId: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${prodottoId}`,{responseType: 'text' as 'json'});
+  }
+
+  private getHttpOptions() {
+    const token = localStorage.getItem('token');
+    return {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      })
+    };
+  }
+
+  getProdottoById(prodottoId: number): Observable<IProdotto> {
+    return this.http.get<IProdotto>(`${this.apiUrl}/${prodottoId}`);
   }
 }
