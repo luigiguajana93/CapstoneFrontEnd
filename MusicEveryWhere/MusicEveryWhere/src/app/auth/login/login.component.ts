@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { tap } from 'rxjs/operators';
 import { ILogin } from '../../Models/ILogin';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,7 @@ export class LoginComponent {
 
   constructor(private AuthService: AuthService, private router: Router) { }
 
-  login(): void {
+  login(form: NgForm): void {
     this.AuthService.login(this.username, this.password)
       .pipe(
         tap((data: ILogin) => {

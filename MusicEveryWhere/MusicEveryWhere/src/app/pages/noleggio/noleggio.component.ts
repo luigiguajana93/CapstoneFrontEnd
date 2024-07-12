@@ -7,6 +7,8 @@ import { NoleggioService } from '../../services/noleggio.service';
 
 import { INoleggioRequestDTO } from '../../Models/INoleggioRequestDTO';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-noleggio',
   templateUrl: './noleggio.component.html',
@@ -17,6 +19,8 @@ export class NoleggioComponent implements OnInit {
   prodottiNoleggiati: IProdotto[] = [];
   cittaNoleggio = CittaNoleggio;
   costoNoleggioTotale: number = 0;
+  modalMessage: string = '';
+  minDate: string;
 
   constructor(
     private fb: FormBuilder,
@@ -28,6 +32,9 @@ export class NoleggioComponent implements OnInit {
       dataFineNoleggio: ['', Validators.required],
       cittaNoleggio: ['', Validators.required]
     });
+
+    const today = new Date();
+    this.minDate = today.toISOString().split('T')[0]; // Imposta la data minima come oggi in formato yyyy-MM-dd
   }
 
   ngOnInit(): void {
@@ -64,11 +71,17 @@ export class NoleggioComponent implements OnInit {
         cittaNoleggio: this.noleggioForm.get('cittaNoleggio')?.value
       };
 
-      this.noleggioService.createNoleggio(noleggioRequest).subscribe(response => {
+      this.noleggioService.createNoleggio(noleggioRequest).subscribe(
+        response => {
         console.log('Noleggio creato con successo', response);
-        // Reset prodotti noleggiati
+        this.showModal('Noleggio confermato ✔️ Riceverai a breve email di conferma');
         this.svuotaNoleggio();
-      });
+      },
+      error => {
+        console.error('Errore durante la conferma dell\'acquisto', error);
+        this.showModal('Errore durante la conferma dell\'acquisto ❌');
+      }
+    );
     }
   }
 
@@ -76,5 +89,15 @@ export class NoleggioComponent implements OnInit {
     this.prodottiNoleggiati = [];
     this.costoNoleggioTotale = 0;
     localStorage.removeItem('prodottiNoleggiati');
+  }
+
+  showModal(message: string): void {
+    this.modalMessage = message;
+    const modalElement = document.getElementById('modal');
+    const modal = new bootstrap.Modal(modalElement!);
+    modal.show();
+    setTimeout(() => {
+      modal.hide();
+    }, 1000);
   }
 }

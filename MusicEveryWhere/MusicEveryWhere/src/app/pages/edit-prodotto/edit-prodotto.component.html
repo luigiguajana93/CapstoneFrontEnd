@@ -1,6 +1,6 @@
 <div class="container mt-5">
-  <h2>Modifica Prodotti</h2>
-  <div class="input-group mb-3">
+  <h1 class="d-flex justify-content-center" >Modifica Prodotti</h1>
+  <div class="input-group mb-3 ">
     <input type="text" class="form-control" placeholder="Cerca prodotto..." [(ngModel)]="searchQuery" (input)="searchProdotti()">
   </div>
 
@@ -9,12 +9,14 @@
       <div class="card">
         <img [src]="prodotto.imageUrl" class="card-img-top" alt="{{ prodotto.nomeProdotto }}">
         <div class="card-body">
-          <h5 class="card-title">{{ prodotto.nomeProdotto }}</h5>
-          <p class="card-text">{{ prodotto.descrizione }}</p>
+          <p class="card-text"><strong class="price">{{ prodotto.prezzo | currency:'EUR':'symbol' }}</strong></p>
+          <h5 class="card-title">{{ prodotto.nomeProdotto | slice:0:20 }}{{ prodotto.nomeProdotto.length > 20 ? '...' : '' }}</h5>
+          <p class="card-text">{{ prodotto.descrizione | slice:0:40 }}{{ prodotto.descrizione.length > 40 ? '...' : '' }}</p>
           <p class="card-text"><strong>Categoria: </strong>{{ prodotto.categoria.descrizione }}</p>
-          <p class="card-text"><strong>Prezzo: </strong> {{ prodotto.prezzo | currency:'EUR':'symbol' }}</p>
-          <button class="btn btn-danger me-2" (click)="confirmDelete(prodotto)">Elimina</button>
-          <button class="btn btn-primary" (click)="selectProdotto(prodotto)" data-bs-toggle="modal" data-bs-target="#editProdottoModal">Modifica</button>
+          <div class="d-flex justify-content-evenly gap-3 ">
+          <button class="btn btn-reset-cat me-2 w-100" (click)="confirmDelete(prodotto)">Elimina</button>
+          <button class="btn btn-cat w-100" (click)="selectProdotto(prodotto)" data-bs-toggle="modal" data-bs-target="#editProdottoModal">Modifica</button>
+        </div>
         </div>
       </div>
     </div>
@@ -22,9 +24,9 @@
 
   <div class="modal fade" id="editProdottoModal" tabindex="-1" aria-labelledby="editProdottoModalLabel" aria-hidden="true">
     <div class="modal-dialog">
-      <div class="modal-content">
+      <div class="modal-content modifica">
         <div class="modal-header">
-          <h5 class="modal-title" id="editProdottoModalLabel">Modifica Prodotto</h5>
+          <h4 class="modal-title" id="editProdottoModalLabel">Modifica Prodotto</h4>
 
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
@@ -55,7 +57,7 @@
               </select>
             </div>
 
-            <button type="submit" class="btn btn-primary mt-3">Salva Modifiche</button>
+            <button type="submit" class="btn btn-modify btn-primary mt-3">Salva Modifiche</button>
           </form>
         </div>
       </div>
@@ -64,8 +66,8 @@
 
   <!-- Modale di conferma per l'eliminazione del prodotto -->
   <div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
+    <div class="modal-dialog ">
+      <div class="modal-content elimina ">
         <div class="modal-header">
           <h5 class="modal-title" id="confirmDeleteModalLabel">Conferma Eliminazione</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>

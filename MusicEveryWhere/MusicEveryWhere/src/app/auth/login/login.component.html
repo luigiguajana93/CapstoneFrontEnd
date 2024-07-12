@@ -1,32 +1,34 @@
 <div class="container mt-5">
   <div class="row">
     <div class="col-md-6 d-flex flex-column align-items-center justify-content-center">
-      <img src="../../../assets/img/logo.jpg" alt="Logo" class="img-fluid mb-3" style="max-width: 80%;">
-      <h1 class="display-4 text-white titolo ">MusicEveryWhere</h1>
-      <h5 class=" text-white subtitolo ">E-Commerce Music Tools & Rentals</h5>
+      <img src="../../../assets/img/logo.jpg" alt="Logo" class="img-fluid logo">
     </div>
     <div class="col-md-6">
       <div class="row justify-content-center">
         <div class="col-md-10">
-
-
-          <div class="container  d-flex justify-content-center">
+          <div class="container d-flex justify-content-center">
             <div class="card login-card">
               <div class="card-body">
                 <h2 class="card-title text-center">Rieccoti tra Noi</h2>
                 <p class="text-center">Siamo felici di rivederti</p>
-                <form (submit)="login()">
+                <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
                   <div class="mb-3">
-                    <label for="username" class="form-label">Nome utente</label>
-                    <input type="text" class="form-control" [(ngModel)]="username" name="username" placeholder="Inserisci il tuo Username" required>
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" [(ngModel)]="username" name="username" placeholder="Inserisci il tuo Username" required #usernameInput="ngModel">
+                    <div *ngIf="usernameInput.invalid && (usernameInput.dirty || usernameInput.touched)" class="text-danger">
+                      *Inserisci username
+                    </div>
                   </div>
                   <div class="mb-3">
                     <label for="password" class="form-label">Password</label>
-                    <input type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Inserisci la password" required>
+                    <input type="password" class="form-control" [(ngModel)]="password" name="password" placeholder="Inserisci la password" required #passwordInput="ngModel">
+                    <div *ngIf="passwordInput.invalid && (passwordInput.dirty || passwordInput.touched)" class="text-danger">
+                      *Inserisci password
+                    </div>
                   </div>
                   <div class="d-flex justify-content-center">
-                  <button type="submit" class="btn btn-primary ">Accedi</button>
-                </div>
+                    <button type="submit" class="btn btn-primary" [disabled]="loginForm.invalid">Accedi</button>
+                  </div>
                 </form>
                 <div class="text-center mt-3">
                   <p>Non hai un account? <a routerLink="../register" class="text-decoration-none">Registrati</a></p>
@@ -34,10 +36,6 @@
               </div>
             </div>
           </div>
-
-
-
-
         </div>
       </div>
     </div>

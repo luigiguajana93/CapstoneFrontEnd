@@ -52,10 +52,15 @@ export class EditProdottoComponent implements OnInit {
   }
 
   searchProdotti(): void {
-    if (this.searchQuery) {
-      this.prodottoService.getProdottiByNome(this.searchQuery).subscribe(data => {
-        this.prodotti = data;
-      });
+    this.filterProdotti();
+  }
+
+  filterProdotti(): void {
+    const query = this.searchQuery.toLowerCase();
+    if (query) {
+      this.prodotti = this.prodotti.filter(prodotto =>
+        prodotto.nomeProdotto.toLowerCase().includes(query)
+      );
     } else {
       this.loadProdotti();
     }

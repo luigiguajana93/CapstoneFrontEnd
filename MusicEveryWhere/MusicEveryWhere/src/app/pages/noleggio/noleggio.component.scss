@@ -1,0 +1,48 @@
+.left-part{
+  background-color: #ffffff;
+  border-radius: 20px;
+  padding: 10px;
+}
+
+h3,h4{
+  color: #093552f6;
+  font-weight: bold;
+}
+
+.btn-bin{
+  background-color: #ad1515b7;
+  color: #fff;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: #520909f6;
+}
+.btn-bin:hover{
+  background-color: #520909f6;
+}
+
+.list-group-item,input,select,option{
+  background-color: #ffffff;
+  color:#0a4d7bf6;
+  font-weight: bold;
+  border-color: #093552f6;
+  border: 0.5px solid;
+
+}
+
+label{
+  color:#093552f6;
+
+  font-size: 1.5rem;
+}
+
+.btn-conf{
+  background-color: #0a4d7bf6;
+}
+.btn-conf:hover{
+  background-color: #032033f6;
+}
+
+.scrollable-list {
+  max-height: 400px; 
+  overflow-y: auto;
+}

@@ -6,3 +6,20 @@ body{
   background-attachment: fixed;
 
 }
+.sms{
+  background-color: #fb9f018d;
+  color: #093552f6;
+  border-radius: 10px;
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+.modal-content {
+  background-color: #fb9f01ee;
+  color: #093552f6;
+  text-align: center;
+}
+
+.modal-backdrop.show {
+  opacity: 0.5;
+}
+

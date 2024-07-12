@@ -1,13 +1,12 @@
 <div class="container mt-5">
-  <div class="row">
-
+  <div class="row left-part">
     <div class="col-md-6">
-      <h3>Prodotti Noleggiati</h3>
-      <ul class="list-group">
+      <h3 class="py-3 d-flex justify-content-center">Prodotti Noleggiati</h3>
+      <ul class="list-group gap-3 scrollable-list">
         <li *ngFor="let prodotto of prodottiNoleggiati" class="list-group-item">
-          <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center justify-content-between">
             <div>
-              <img [src]="prodotto.imageUrl" alt="{{ prodotto.nomeProdotto }}" class="img-thumbnail" width="50">
+              <img [src]="prodotto.imageUrl" alt="{{ prodotto.nomeProdotto }}" width="50">
               <span>{{ prodotto.nomeProdotto }}</span>
             </div>
             <div>
@@ -16,29 +15,45 @@
           </div>
         </li>
       </ul>
-      <button class="btn btn-danger mt-3" (click)="svuotaNoleggio()">Svuota Noleggio</button>
+      <button *ngIf="prodottiNoleggiati.length > 0" class="btn btn-bin my-5" (click)="svuotaNoleggio()">Svuota Noleggio</button>
     </div>
 
     <div class="col-md-6">
-      <h3>Dettagli Noleggio</h3>
-      <form [formGroup]="noleggioForm" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-          <label for="dataInizioNoleggio">Data Inizio Noleggio</label>
-          <input id="dataInizioNoleggio" type="date" class="form-control" formControlName="dataInizioNoleggio" (change)="calculateCostoNoleggioTotale()">
+      <h3 class="py-3 d-flex justify-content-center">Dettagli Noleggio</h3>
+      <form class="d-flex flex-column justify-content-between" [formGroup]="noleggioForm" (ngSubmit)="onSubmit()">
+        <div>
+          <div class="form-group">
+            <label for="dataInizioNoleggio">Data Inizio Noleggio</label>
+            <input id="dataInizioNoleggio" type="date" class="form-control" formControlName="dataInizioNoleggio" (change)="calculateCostoNoleggioTotale()" [min]="minDate">
+          </div>
+          <div class="form-group">
+            <label for="dataFineNoleggio">Data Fine Noleggio</label>
+            <input id="dataFineNoleggio" type="date" class="form-control" formControlName="dataFineNoleggio" (change)="calculateCostoNoleggioTotale()" [min]="minDate">
+          </div>
+          <div class="form-group">
+            <label for="cittaNoleggio">Città Noleggio</label>
+            <select id="cittaNoleggio" class="form-control" formControlName="cittaNoleggio">
+              <option value="" disabled selected> -- Inserisci la Città -- </option>
+              <option *ngFor="let citta of cittaNoleggio | keyvalue" [value]="citta.key">{{ citta.key }}</option>
+            </select>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="dataFineNoleggio">Data Fine Noleggio</label>
-          <input id="dataFineNoleggio" type="date" class="form-control" formControlName="dataFineNoleggio" (change)="calculateCostoNoleggioTotale()">
+        <div class="d-flex justify-content-between align-items-center mt-5">
+          <h4>Costo Noleggio Totale: {{ costoNoleggioTotale | currency:'EUR':'symbol' }}</h4>
+          <button type="submit" class="btn btn-primary btn-conf" [disabled]="!noleggioForm.valid">Conferma Noleggio</button>
         </div>
-        <div class="form-group">
-          <label for="cittaNoleggio">Città Noleggio</label>
-          <select id="cittaNoleggio" class="form-control" formControlName="cittaNoleggio">
-            <option *ngFor="let citta of cittaNoleggio | keyvalue" [value]="citta.key">{{ citta.key }}</option>
-          </select>
-        </div>
-        <h4>Costo Noleggio Totale: {{ costoNoleggioTotale | currency:'EUR':'symbol' }}</h4>
-        <button type="submit" class="btn btn-primary mt-3">Conferma Noleggio</button>
       </form>
+    </div>
+  </div>
+
+  <!-- Finestra modale -->
+  <div id="modal" class="modal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-body sms">
+          <p>{{ modalMessage }}</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

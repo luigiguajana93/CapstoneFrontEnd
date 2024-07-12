@@ -5,6 +5,8 @@ import { ProdottoService } from '../../services/prodotto.service';
 import { Router } from '@angular/router';
 import { ICategoria } from '../../Models/ICategoria';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-add-prodotto',
   templateUrl: './add-prodotto.component.html',
@@ -13,6 +15,7 @@ import { ICategoria } from '../../Models/ICategoria';
 export class AddProdottoComponent implements OnInit {
   prodottoForm: FormGroup;
   categorie: ICategoria[] = [];
+  modalMessage: string = '';
 
   constructor(
     private fb: FormBuilder,
@@ -46,4 +49,5 @@ export class AddProdottoComponent implements OnInit {
       });
     }
   }
+  
 }

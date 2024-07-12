@@ -9,8 +9,8 @@
           <button (click)="uploadAvatar()" class="btn btn-primary mt-2" *ngIf="editMode && selectedFile">Aggiorna Avatar</button>
         </div>
         <div class="col-md-8">
-          <button class="btn btn-car mt-3 " (click)="tornaIndietro()"> <- Indietro</button>
-          <h3 class="d-flex justify-content-center">Compila tutti i campi da modificare</h3>
+          <button class="btn btn-car my-3 " (click)="tornaIndietro()"> <- Indietro</button>
+          <h3 *ngIf="editMode" class="d-flex justify-content-center">*Compila tutti i campi da modificare</h3>
           <ul class="list-group">
             <li class="list-group-item"><strong>Username:</strong> <span  *ngIf="!editMode">{{ utente.username }}</span> <input class="form-control" [(ngModel)]="utente.username" *ngIf="editMode"></li>
             <li class="list-group-item"><strong>Email:</strong> <span  *ngIf="!editMode">{{ utente.email }}</span> <input class="form-control" [(ngModel)]="utente.email" *ngIf="editMode"></li>

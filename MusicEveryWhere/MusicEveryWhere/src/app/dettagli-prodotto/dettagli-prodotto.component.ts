@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IProdotto } from '../Models/IProdotto';
 import { ProdottoService } from '../services/prodotto.service';
 
-
+declare var bootstrap: any;
 
 @Component({
   selector: 'app-dettagli-prodotto',
@@ -12,6 +12,7 @@ import { ProdottoService } from '../services/prodotto.service';
 })
 export class DettagliProdottoComponent implements OnInit {
   prodotto: IProdotto | undefined;
+  modalMessage: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -37,6 +38,7 @@ export class DettagliProdottoComponent implements OnInit {
     prodottiCarrello.push(prodotto);
     localStorage.setItem('prodottiCarrello', JSON.stringify(prodottiCarrello));
     console.log('Prodotto aggiunto al carrello');
+    this.showModal('Aggiunto al Carrello ✔️');
   }
 
   aggiungiANoleggio(prodotto: IProdotto): void {
@@ -44,8 +46,19 @@ export class DettagliProdottoComponent implements OnInit {
     prodottiNoleggiati.push(prodotto);
     localStorage.setItem('prodottiNoleggiati', JSON.stringify(prodottiNoleggiati));
     console.log('Prodotto aggiunto al noleggio');
+    this.showModal('Aggiunto al Noleggio ✔️');
   }
 
+
+  showModal(message: string): void {
+    this.modalMessage = message;
+    const modalElement = document.getElementById('modal');
+    const modal = new bootstrap.Modal(modalElement!);
+    modal.show();
+    setTimeout(() => {
+      modal.hide();
+    }, 2000);
+  }
 
   tornaIndietro(): void {
     this.router.navigate(['/home']);

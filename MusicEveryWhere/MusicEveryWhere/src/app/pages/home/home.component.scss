@@ -67,19 +67,43 @@ body {
 
 //FINE CAROSELLO
 
+.price{
+background-color: #fb9f01ee;
+display: flex;
+justify-content: space-around;
+color:#407d07ee;
+border-radius: 20px;
+}
+
+.card-title{
+  display: flex;
+  justify-content: center;
+  font-size: 2.0rem;
+  color:#093552f6;
+  height: 80px;
+}
 
 .card-img-top{
   width: 100%;
   height: 200px;
-  object-fit: cover;
+  object-fit: contain;
+}
+
+.card-body{
+  background: rgb(251,159,1);
+background: linear-gradient(332deg, rgba(251,159,1,0.5214460784313726) 28%, rgba(21,112,173,0.5522584033613445) 53%);
 }
 
 .card {
   box-shadow: rgba(255, 132, 0, 0.984) 0px 1px 4px, rgba(0, 115, 255, 0.578) 0px 0px 0px 3px;
   transition: transform 0.2s;
-
+  width: 300px;
 }
 
+.card-text{
+  font-size: 1.2rem;
+  color: #2d2a13;
+}
 
 .card:hover {
   transform: scale(1.05);
@@ -88,6 +112,9 @@ body {
 .btn-reset-cat{
   background-color: #fb9f01ee;
   color: #fff;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: #855503ee;
 }
 
 .btn-reset-cat:hover{
@@ -97,8 +124,24 @@ body {
 .btn-cat{
   background-color: #1570adb7;
   color: #fff;
+  border-radius: 20px;
+  border: 1px solid;
+  border-color: #093552f6;
 }
 
 .btn-cat:hover{
   background-color: #093552f6;
 }
+
+.cat{
+  color: #093552f6;
+}
+
+.btn-selected {
+  background-color: #fb9f01ee;
+  color: #fff ;
+  border-color: #855503ee ;
+  border-radius: 20px;
+}
+
+

@@ -6,6 +6,8 @@ import { ICategoria } from '../../Models/ICategoria';
 import { AuthService } from '../../auth/auth.service';
 import { Router } from '@angular/router';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -16,6 +18,7 @@ export class HomeComponent implements OnInit {
   categorie: ICategoria[] = [];
   searchQuery: string = '';
   selectedCategoriaId: number | null = null;
+  modalMessage: string = '';
 
   constructor(
     private prodottoService: ProdottoService,
@@ -48,10 +51,15 @@ export class HomeComponent implements OnInit {
   }
 
   searchProdotti(): void {
-    if (this.searchQuery) {
-      this.prodottoService.getProdottiByNome(this.searchQuery).subscribe(data => {
-        this.prodotti = data;
-      });
+    this.filterProdotti();
+  }
+
+  filterProdotti(): void {
+    const query = this.searchQuery.toLowerCase();
+    if (query) {
+      this.prodotti = this.prodotti.filter(prodotto =>
+        prodotto.nomeProdotto.toLowerCase().includes(query)
+      );
     } else {
       this.loadProdotti();
     }
@@ -76,6 +84,7 @@ export class HomeComponent implements OnInit {
     prodottiCarrello.push(prodotto);
     localStorage.setItem('prodottiCarrello', JSON.stringify(prodottiCarrello));
     console.log('Prodotto aggiunto al carrello');
+    this.showModal('Aggiunto al Carrello ✔️');
   }
 
   aggiungiANoleggio(prodotto: IProdotto): void {
@@ -83,5 +92,17 @@ export class HomeComponent implements OnInit {
     prodottiNoleggiati.push(prodotto);
     localStorage.setItem('prodottiNoleggiati', JSON.stringify(prodottiNoleggiati));
     console.log('Prodotto aggiunto al noleggio');
+    this.showModal('Aggiunto al Noleggio ✔️');
+
+  }
+
+  showModal(message: string): void {
+    this.modalMessage = message;
+    const modalElement = document.getElementById('modal');
+    const modal = new bootstrap.Modal(modalElement!);
+    modal.show();
+    setTimeout(() => {
+      modal.hide();
+    }, 1000);
   }
 }
