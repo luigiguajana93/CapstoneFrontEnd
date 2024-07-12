@@ -18,6 +18,7 @@ export class EditProdottoComponent implements OnInit {
   prodottoToDelete: IProdotto | null = null;
   searchQuery: string = '';
   prodottoForm: FormGroup;
+  selectedFile: File | null = null;
 
   constructor(
     private prodottoService: ProdottoService,
@@ -82,9 +83,30 @@ export class EditProdottoComponent implements OnInit {
     if (this.prodottoToDelete) {
       this.prodottoService.deleteProdotto(this.prodottoToDelete.id).subscribe(
         () => {
-          console.log(this.prodottoToDelete?.id)
           this.prodotti = this.prodotti.filter(p => p.id !== this.prodottoToDelete!.id);
           this.prodottoToDelete = null;
+        }
+      );
+    }
+  }
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
+  uploadImage(): void {
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+
+      this.prodottoService.uploadImage(formData).subscribe(
+        response => {
+          const imageUrl = response.url; // Assicurati che questa chiave corrisponda alla tua risposta backend
+          this.prodottoForm.patchValue({ imageUrl });
+          this.selectedFile = null;
+        },
+        error => {
+          console.error('Errore durante il caricamento dell\'immagine', error);
         }
       );
     }

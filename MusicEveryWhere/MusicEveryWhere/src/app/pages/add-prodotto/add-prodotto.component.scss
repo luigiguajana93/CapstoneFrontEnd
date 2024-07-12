@@ -21,3 +21,39 @@ h1,label{
   color:#fb5e01;
   }
 
+input{
+  color: #fdfef9;
+}
+
+.comic-button {
+  display: inline-block;
+  padding: 10px 20px;
+  font-size: 10px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background-color: #f18a2e;
+  border: 2px solid #000;
+  border-radius: 10px;
+  box-shadow: 5px 5px 0px #000;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.comic-button:hover {
+  background-color: #fff;
+  color: #11578e;
+  border: 2px solid #f18a2e;
+  box-shadow: 5px 5px 0px #f18a2e;
+}
+
+.comic-button:active {
+  background-color: #fcf414;
+  box-shadow: none;
+  transform: translateY(4px);
+}
+
+span{
+  color:#fff;
+}

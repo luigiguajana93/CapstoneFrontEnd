@@ -47,8 +47,9 @@
               <input id="prezzo" type="number" class="form-control" formControlName="prezzo">
             </div>
             <div class="form-group">
-              <label for="imageUrl">URL Immagine</label>
-              <input id="imageUrl" class="form-control" formControlName="imageUrl">
+              <label for="image">Carica Immagine</label>
+              <input type="file" id="image" (change)="onFileSelected($event)">
+              <button type="button" (click)="uploadImage()">✔️</button>
             </div>
             <div class="form-group">
               <label for="categoriaId">Categoria</label>

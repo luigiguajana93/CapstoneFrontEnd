@@ -1,21 +1,25 @@
 <div class="container mt-5">
   <h1 class="text-center">Aggiungi Prodotto</h1>
-  <form [formGroup]="prodottoForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
+  <form  [formGroup]="prodottoForm" (ngSubmit)="onSubmit()">
+    <div class="py-3 form-group">
       <label for="nomeProdotto">Nome Prodotto</label>
       <input id="nomeProdotto" class="form-control" formControlName="nomeProdotto">
     </div>
-    <div class="form-group">
+    <div class="py-3 form-group">
       <label for="descrizione">Descrizione</label>
       <textarea id="descrizione" class="form-control" formControlName="descrizione"></textarea>
     </div>
-    <div class="form-group">
+    <div class="py-3 form-group">
       <label for="prezzo">Prezzo</label>
       <input id="prezzo" type="number" class="form-control" formControlName="prezzo">
     </div>
-    <div class="form-group">
-      <label for="imageUrl">URL Immagine</label>
-      <input id="imageUrl" class="form-control" formControlName="imageUrl">
+    <div class="py-3 form-group">
+      <label for="image">Carica Immagine </label>
+      <div>
+      <input type="file" id="image" (change)="onFileSelected($event)">
+      <button class="comic-button" type="button" (click)="uploadImage()">Carica Immagine</button>
+      <span *ngIf="imageUploaded" class="ms-3">Immagine caricata ☑️</span>
+    </div>
     </div>
     <div class="form-group">
       <label for="categoriaId">Categoria</label>

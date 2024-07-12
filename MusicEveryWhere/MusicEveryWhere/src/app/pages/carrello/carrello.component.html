@@ -1,8 +1,12 @@
 <div class="container mt-5 left-part">
   <h3 class="py-3 d-flex justify-content-center">Carrello</h3>
   <ul class="list-group scrollable-list">
-    <li *ngFor="let prodotto of prodottiCarrello" class="list-group-item  ">
-      <div class="d-flex justify-content-between ">
+    <li *ngFor="let prodotto of prodottiCarrello; let i = index" class="list-group-item  ">
+      <div class="d-flex justify-content-between align-items-center ">
+
+
+
+
         <div>
           <img [src]="prodotto.imageUrl" alt="{{ prodotto.nomeProdotto }}" class="img-thumbnail" width="50">
           <span>{{ prodotto.nomeProdotto }}</span>

@@ -15,7 +15,9 @@ declare var bootstrap: any;
 export class AddProdottoComponent implements OnInit {
   prodottoForm: FormGroup;
   categorie: ICategoria[] = [];
+  selectedFile: File | null = null;
   modalMessage: string = '';
+  imageUploaded: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -49,5 +51,28 @@ export class AddProdottoComponent implements OnInit {
       });
     }
   }
-  
+
+
+  onFileSelected(event: any): void {
+    this.selectedFile = event.target.files[0];
+  }
+
+  uploadImage(): void {
+    if (this.selectedFile) {
+      const formData = new FormData();
+      formData.append('file', this.selectedFile);
+
+      this.prodottoService.uploadImage(formData).subscribe(
+        response => {
+          const imageUrl = response.url; // Assicurati che questa chiave corrisponda alla tua risposta backend
+          this.prodottoForm.patchValue({ imageUrl });
+          this.selectedFile = null;
+          this.imageUploaded = true; // Imposta su true quando l'immagine è stata caricata con successo
+        },
+        error => {
+          console.error('Errore durante il caricamento dell\'immagine', error);
+        }
+      );
+    }
+  }
 }

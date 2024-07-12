@@ -67,4 +67,9 @@ export class ProdottoService {
   getProdottoById(prodottoId: number): Observable<IProdotto> {
     return this.http.get<IProdotto>(`${this.apiUrl}/${prodottoId}`);
   }
+
+
+  uploadImage(formData: FormData): Observable<{ url: string }> {
+    return this.http.post<{ url: string }>(`${this.apiUrl}/upload`, formData);
+  }
 }

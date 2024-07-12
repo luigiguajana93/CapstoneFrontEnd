@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'MusicEveryWhere';
+
+  constructor(private router: Router, private authService: AuthService) {}
+
+  ngOnInit(): void {
+    const currentUser = this.authService.getCurrentUser();
+    if (!currentUser) {
+      this.router.navigate(['/auth/login']);
+    }
+  }
 }
